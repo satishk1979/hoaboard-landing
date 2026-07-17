@@ -323,14 +323,31 @@ footer a:hover{color:var(--mid)}
 
 <script>
 const BRANDS = [
-  { name:"Goodwin & Company", sub:"Texas · CO · LA", initial:"G",  color:"#1B4F8A", accentBg:"#EAF1F9", accentTx:"#1B4F8A" },
-  { name:"Associa",            sub:"National",        initial:"A",  color:"#00539B", accentBg:"#E8F1F9", accentTx:"#00539B" },
-  { name:"FirstService Residential", sub:"National", initial:"F",  color:"#00693E", accentBg:"#E9F4EE", accentTx:"#00693E" },
-  { name:"RealManage",         sub:"National",        initial:"R",  color:"#C8102E", accentBg:"#FBEBEE", accentTx:"#B00E28" },
-  { name:"CCMC",               sub:"Community builders", initial:"C", color:"#7A3E8F", accentBg:"#F4ECF7", accentTx:"#7A3E8F" },
-  { name:"JellyBird HOA",      sub:"Small-HOA platform", initial:"🪼", color:"#2A9D8F", accentBg:"#E8F5F3", accentTx:"#1F7A6E" },
-  { name:"PAMco",              sub:"Central Texas",   initial:"P",  color:"#B45309", accentBg:"#FDF2E4", accentTx:"#92400E" },
-  { name:"Your Company",       sub:"Any brand, any palette", initial:"✦", color:"#2563EB", accentBg:"#EFF4FF", accentTx:"#1D4ED8" },
+  // Colors sourced from each company's public branding
+  { name:"Goodwin & Company", sub:"Texas · CO · LA", initial:"G",
+    color:"#232A5C", accent:"#EF6A37", accentBg:"#FDEFE8", accentTx:"#C2481D",
+    grad:"linear-gradient(120deg,#232A5C 0%,#3A4382 100%)" },
+  { name:"Associa",            sub:"National",        initial:"a",
+    color:"#D2232A", accent:"#8A1518", accentBg:"#FCEBEC", accentTx:"#A81B21",
+    grad:"linear-gradient(120deg,#B71C22 0%,#D2232A 100%)" },
+  { name:"FirstService Residential", sub:"National", initial:"F",
+    color:"#006341", accent:"#66A87E", accentBg:"#E9F3EE", accentTx:"#00543A",
+    grad:"linear-gradient(120deg,#00492F 0%,#006341 100%)" },
+  { name:"RealManage",         sub:"National",        initial:"R",
+    color:"#1E6BB8", accent:"#E23B3B", accentBg:"#EAF2FB", accentTx:"#175697",
+    grad:"linear-gradient(120deg,#164F8C 0%,#1E6BB8 100%)" },
+  { name:"CCMC",               sub:"Community builders", initial:"C",
+    color:"#A6093D", accent:"#E8A33D", accentBg:"#F9EAEF", accentTx:"#8A0833",
+    grad:"linear-gradient(120deg,#7C062E 0%,#A6093D 100%)" },
+  { name:"JellyBird HOA",      sub:"Small-HOA platform", initial:"🪼",
+    color:"#1FA79B", accent:"#123C5B", accentBg:"#E6F5F3", accentTx:"#137A71",
+    grad:"linear-gradient(120deg,#137A71 0%,#1FA79B 100%)" },
+  { name:"PAMco",              sub:"Central Texas",   initial:"P",
+    color:"#24446C", accent:"#C9A24B", accentBg:"#EDF1F7", accentTx:"#1C3557",
+    grad:"linear-gradient(120deg,#1A3050 0%,#24446C 100%)" },
+  { name:"Your Company",       sub:"Any brand, any palette", initial:"✦",
+    color:"#2563EB", accent:"#1D4ED8", accentBg:"#EFF4FF", accentTx:"#1D4ED8",
+    grad:"linear-gradient(120deg,#1D4ED8 0%,#2563EB 100%)" },
 ];
 
 const list = document.getElementById("brandList");
@@ -349,7 +366,8 @@ function applyBrand(i, btn){
   document.querySelectorAll(".brand-btn").forEach(x => x.classList.remove("active"));
   btn.classList.add("active");
   const b = BRANDS[i];
-  document.getElementById("dTop").style.background = b.color;
+  const top = document.getElementById("dTop");
+  top.style.background = b.grad || b.color;
   document.getElementById("dLogo").textContent = b.initial;
   document.getElementById("dName").innerHTML = b.name;
   const tab = document.getElementById("dTabOn");
@@ -358,7 +376,7 @@ function applyBrand(i, btn){
   document.getElementById("dQ").style.background = b.color;
   const cite = document.getElementById("dCite");
   cite.style.background = b.accentBg;
-  cite.style.borderLeft = "3px solid " + b.color;
+  cite.style.borderLeft = "3px solid " + (b.accent || b.color);
   cite.querySelector(".q").style.color = b.accentTx;
   document.getElementById("dCiteS").style.color = b.accentTx;
   document.getElementById("dPow").style.color = b.color;
