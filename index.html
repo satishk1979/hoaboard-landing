@@ -54,6 +54,19 @@ h2{font-size:clamp(24px,3.4vw,34px);font-weight:900;color:var(--navy);letter-spa
 .price-line{font-size:clamp(26px,4vw,40px);font-weight:900;margin:18px 0 6px}
 .price-line small{font-size:16px;font-weight:600;color:#A9C4FF}
 footer{padding:38px 24px;text-align:center;color:var(--dim);font-size:12.5px}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(15,30,61,.55);z-index:100;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
+.modal-bg.on{display:flex}
+.modal{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:30px;position:relative}
+.modal .x{position:absolute;top:12px;right:16px;border:none;background:none;font-size:22px;color:var(--dim);cursor:pointer}
+.modal h3{font-size:20px;font-weight:900;color:var(--navy);margin-bottom:4px}
+.modal .msub{font-size:13px;color:var(--mid);margin-bottom:16px}
+.modal label{display:block;font-size:12px;font-weight:700;color:var(--navy);margin:12px 0 4px}
+.modal input,.modal select,.modal textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit}
+.modal input:focus,.modal select:focus,.modal textarea:focus{outline:none;border-color:var(--blue)}
+.modal button[type=submit]{width:100%;margin-top:18px;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:800;font-family:inherit;cursor:pointer}
+.modal .ok-msg{display:none;text-align:center;padding:30px 8px}
+.modal .ok-msg .big{font-size:40px}
+.modal .ok-msg h3{margin-top:10px}
 .note{font-size:11.5px;color:var(--dim);text-align:center;margin-top:14px}
 @media(max-width:640px){.vs td:first-child{width:auto}}
 </style>
@@ -123,5 +136,54 @@ footer{padding:38px 24px;text-align:center;color:var(--dim);font-size:12.5px}
 </div></section>
 
 <footer>HOABoard.ai — AI operations for self-managed communities · <a href="mailto:satish.kodukula@gmail.com" style="color:var(--blue)">satish.kodukula@gmail.com</a></footer>
+<div class="modal-bg" id="demoModal" onclick="if(event.target===this)closeDemo()">
+  <div class="modal">
+    <button class="x" onclick="closeDemo()">✕</button>
+    <div id="demoForm">
+      <h3>See HOABoard on your community</h3>
+      <p class="msub">We'll set up a walkthrough using your community's own documents — takes about 20 minutes.</p>
+      <form id="demoF" onsubmit="return sendDemo(event)">
+        <label>Your name</label>
+        <input name="name" required placeholder="Jane Smith">
+        <label>Email</label>
+        <input name="email" type="email" required placeholder="jane@example.com">
+        <label>Community name</label>
+        <input name="community" required placeholder="Oak Hollow HOA">
+        <label>Number of homes</label>
+        <select name="homes"><option>Under 50</option><option>50–150</option><option selected>150–300</option><option>300–500</option><option>500+</option></select>
+        <label>Your role</label>
+        <select name="role"><option selected>Board President</option><option>Treasurer</option><option>Secretary</option><option>Board Member</option><option>Committee Member</option><option>Homeowner</option></select>
+        <label>Anything else? (optional)</label>
+        <textarea name="message" rows="2" placeholder="Biggest headache right now…"></textarea>
+        <input type="hidden" name="_subject" value="HOABoard demo request">
+        <button type="submit" id="demoBtn">Request my demo</button>
+      </form>
+    </div>
+    <div class="ok-msg" id="demoOk">
+      <div class="big">✅</div>
+      <h3>Request received!</h3>
+      <p class="msub">We'll reach out within one business day to schedule your walkthrough.</p>
+    </div>
+  </div>
+</div>
+<script>
+function openDemo(){document.getElementById('demoModal').classList.add('on');document.body.style.overflow='hidden'}
+function closeDemo(){document.getElementById('demoModal').classList.remove('on');document.body.style.overflow=''}
+async function sendDemo(e){
+  e.preventDefault();
+  const btn=document.getElementById('demoBtn');btn.textContent='Sending…';btn.disabled=true;
+  const data=Object.fromEntries(new FormData(document.getElementById('demoF')));
+  try{
+    const r=await fetch('https://formsubmit.co/ajax/satish.kodukula@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+    if(!r.ok)throw 0;
+    document.getElementById('demoForm').style.display='none';
+    document.getElementById('demoOk').style.display='block';
+  }catch(_){
+    location.href='mailto:satish.kodukula@gmail.com?subject=HOABoard demo request&body='+encodeURIComponent('Name: '+data.name+'\nEmail: '+data.email+'\nCommunity: '+data.community+' ('+data.homes+' homes)\nRole: '+data.role+'\n'+(data.message||''));
+  }
+  return false;
+}
+document.querySelectorAll('a[href^="mailto:satish.kodukula@gmail.com?subject=HOABoard%20demo%20request"]').forEach(a=>{a.removeAttribute('href');a.style.cursor='pointer';a.onclick=openDemo});
+</script>
 </body>
 </html>
