@@ -125,8 +125,37 @@ footer{padding:38px 24px;text-align:center;color:var(--dim);font-size:12.5px}
 <section><div class="dark">
   <h2>Simple, honest pricing</h2>
   <div class="price-line">$5 <small>per home / month</small></div>
-  <p style="color:#A9C4FF">$299/month minimum · billed annually · every agent, every automation, unlimited board and committee members, onboarding of your governing documents included.</p>
-  <p>A 132-home community pays $660/month — about half of a typical management contract, with the day-to-day work done for you instead of by you. Keep the difference in your reserves.</p>
+  <div style="max-width:520px;margin:26px auto 0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:24px;text-align:left">
+    <b style="font-size:14px;letter-spacing:.04em">SEE WHAT YOUR COMMUNITY WOULD SAVE</b>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+      <div><label style="font-size:11.5px;color:#A9C4FF;font-weight:700;display:block;margin-bottom:5px">Homes in your community</label>
+      <input id="calcHomes" type="number" value="132" min="1" oninput="calc()" style="width:100%;padding:11px;border-radius:9px;border:none;font-size:16px;font-weight:700;font-family:inherit"></div>
+      <div><label style="font-size:11.5px;color:#A9C4FF;font-weight:700;display:block;margin-bottom:5px">Current management cost / month</label>
+      <input id="calcFee" type="number" value="1450" min="0" oninput="calc()" style="width:100%;padding:11px;border-radius:9px;border:none;font-size:16px;font-weight:700;font-family:inherit"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:18px;text-align:center">
+      <div><div style="font-size:12px;color:#A9C4FF">HOABoard</div><div id="calcOurs" style="font-size:22px;font-weight:900">$660/mo</div></div>
+      <div><div style="font-size:12px;color:#A9C4FF">You save monthly</div><div id="calcMo" style="font-size:22px;font-weight:900;color:#6EE7A0">$790</div></div>
+      <div><div style="font-size:12px;color:#A9C4FF">You save yearly</div><div id="calcYr" style="font-size:22px;font-weight:900;color:#6EE7A0">$9,480</div></div>
+    </div>
+    <div id="calcNote" style="font-size:12px;color:#A9C4FF;margin-top:14px;text-align:center">That's money that stays in your reserves — with the day-to-day work done for you.</div>
+  </div>
+  <script>
+  function calc(){
+    var homes=Math.max(1,Number(document.getElementById('calcHomes').value)||0);
+    var fee=Math.max(0,Number(document.getElementById('calcFee').value)||0);
+    var ours=homes*5;
+    var mo=fee-ours, yr=mo*12;
+    document.getElementById('calcOurs').textContent='$'+ours.toLocaleString()+'/mo';
+    var mEl=document.getElementById('calcMo'), yEl=document.getElementById('calcYr');
+    if(mo>0){ mEl.textContent='$'+mo.toLocaleString(); yEl.textContent='$'+yr.toLocaleString(); mEl.style.color=yEl.style.color='#6EE7A0';
+      document.getElementById('calcNote').textContent="That's money that stays in your reserves — with the day-to-day work done for you.";
+    } else { mEl.textContent='—'; yEl.textContent='—'; 
+      document.getElementById('calcNote').textContent='Self-managed today? Then HOABoard costs $'+ours.toLocaleString()+'/mo — and gives your volunteers their evenings back.';
+    }
+  }
+  calc();
+  </script>
   <div style="margin-top:24px"><a class="btn btn-p" style="background:#fff;color:var(--navy)" href="mailto:satish.kodukula@gmail.com?subject=HOABoard%20demo%20request">Get a demo on your documents</a></div>
 </div></section>
 
