@@ -212,6 +212,80 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
 .foot nav{margin-left:auto;display:flex;gap:22px}
 .foot nav a:hover{color:var(--text)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+/* third-way resolution card (inside dark band) */
+.third-way{margin:28px auto 0;max-width:780px;background:linear-gradient(180deg,var(--ink-surface-2),var(--ink-surface));
+  border:1.5px solid var(--brand);border-radius:var(--r-xl);padding:clamp(26px,4vw,40px);text-align:center;
+  box-shadow:0 0 0 1px rgba(0,210,122,.12),0 24px 60px -24px rgba(0,210,122,.35)}
+.third-way .tw-tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:#05221A;background:var(--ink-green);padding:5px 13px;border-radius:var(--r-pill)}
+.third-way h3{color:var(--ink-text);font-size:clamp(1.5rem,3.2vw,2rem);margin-top:16px}
+.third-way p{color:var(--ink-text-2);margin:12px auto 22px;max-width:54ch}
+
+/* self-serve checklist */
+.checklist{max-width:620px;margin:44px auto 0;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:28px;box-shadow:var(--shadow-md)}
+.cl-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cl-head b{font-size:1.0625rem}
+.cl-prog{font-size:13px;font-weight:600;color:var(--brand-ink);background:var(--brand-weak);padding:3px 11px;border-radius:var(--r-pill)}
+.cl-bar{height:6px;background:var(--surface-sunken);border-radius:var(--r-pill);margin:14px 0 22px;overflow:hidden}
+.cl-bar i{display:block;height:100%;width:80%;background:var(--brand);border-radius:inherit}
+.checklist ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+.checklist li{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text)}
+.checklist li .box{width:22px;height:22px;border-radius:7px;flex:none;display:grid;place-items:center;
+  border:1.5px solid var(--border-strong);color:transparent}
+.checklist li.done .box{background:var(--brand);border-color:var(--brand);color:#fff}
+.checklist li.done{color:var(--text-secondary)}
+.checklist li .opt{font-size:12px;color:var(--text-tertiary);font-weight:500;margin-left:4px}
+.cl-foot{font-size:13.5px;color:var(--text-secondary);margin-top:20px;text-align:center}
+
+/* clickable feature cards */
+.card.clk{cursor:pointer}
+.card.clk:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.card .see{margin-top:14px;font-size:13.5px;font-weight:600;color:var(--brand-ink);display:inline-flex;align-items:center;gap:6px;opacity:.85}
+.card.clk:hover .see{opacity:1}
+.card .see .arrow{transition:transform .15s}
+.card.clk:hover .see .arrow{transform:translateX(3px)}
+
+/* modal / product viewer */
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:18px;
+  background:rgba(7,9,13,.55);backdrop-filter:blur(4px)}
+.modal.open{display:flex}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);box-shadow:var(--shadow-lg);
+  width:min(680px,100%);max-height:88vh;overflow:auto;position:relative}
+.modal-head{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--surface);z-index:1}
+.modal-head .mt{font-weight:700;font-size:1.0625rem}
+.modal-head .ms{font-size:13px;color:var(--text-secondary);margin-top:2px}
+.modal-close{margin-left:auto;width:34px;height:34px;border-radius:9px;border:1px solid var(--border);
+  background:var(--surface-2);cursor:pointer;font-size:19px;line-height:1;color:var(--text-secondary);flex:none}
+.modal-close:hover{color:var(--text);border-color:var(--border-strong)}
+.modal-body{padding:22px}
+.pv-panel{display:none}.pv-panel.on{display:block}
+
+/* product-view primitives (mirror the app's components) */
+.pv-win{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--surface)}
+.pv-bar{display:flex;align-items:center;gap:9px;padding:11px 14px;background:var(--surface-2);
+  border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text-secondary)}
+.pv-bar .dot{width:9px;height:9px;border-radius:50%;background:var(--brand);flex:none}
+.pv-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;
+  border-bottom:1px solid var(--border);font-size:14px}
+.pv-row:last-child{border-bottom:none}
+.pv-row .l{color:var(--text)}.pv-row .sub{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+.pv-amt{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pos{color:var(--positive-ink)} .neg{color:var(--negative)}
+.pv-badge{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 9px;border-radius:var(--r-pill);white-space:nowrap}
+.b-ok{background:var(--positive-weak);color:var(--positive-ink)}
+.b-bad{background:var(--negative-weak);color:var(--negative)}
+.b-wait{background:var(--brand-weak);color:var(--brand-ink)}
+.pv-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px;border-bottom:1px solid var(--border)}
+.pv-kpi{background:var(--surface-2);border-radius:var(--r-md);padding:12px}
+.pv-kpi .v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}.pv-kpi .l{font-size:11px;color:var(--text-tertiary);margin-top:2px}
+.pv-qa{padding:14px;border-bottom:1px solid var(--border)}.pv-qa:last-child{border-bottom:none}
+.pv-qa .q{font-size:13px;font-weight:600;color:var(--text-secondary)}
+.pv-qa .a{font-size:14px;margin-top:6px}
+.pv-qa .src{font-size:12px;font-weight:600;color:var(--brand-ink);margin-top:8px}
+@media(max-width:560px){.pv-kpis{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body id="top">
@@ -311,8 +385,9 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
   <section class="band">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow">The two bad options</div>
-        <h2>Today, self-managed boards just get to pick their problem.</h2>
+        <div class="eyebrow">Until now</div>
+        <h2>Self-managed boards have had two options. Both are bad.</h2>
+        <p>Here’s what every other company offers you — and why HOABoard is neither of them.</p>
       </div>
       <div class="paths">
         <div class="path">
@@ -327,6 +402,14 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
           <p>Dues in one file, the bank in another, a binder of CC&amp;Rs, and homeowner emails at 10pm. One treasurer burns out and the whole thing wobbles at the next election.</p>
         </div>
       </div>
+
+      <!-- resolution: HOABoard is the third way -->
+      <div class="third-way">
+        <span class="tw-tag">The third option → HOABoard</span>
+        <h3>Not a management company. Not a spreadsheet.</h3>
+        <p>HOABoard gives your board everything a management company does — the books, filings, violations, and homeowner questions — run by you, for a flat fee. No per-door billing, no 10pm spreadsheets, and your money never leaves your bank.</p>
+        <a class="btn btn-primary" href="#features">See what your board gets <span class="arrow">→</span></a>
+      </div>
     </div>
   </section>
 
@@ -336,38 +419,44 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
       <div class="sec-head">
         <div class="eyebrow">What your board gets</div>
         <h2>The work of a management company, run by software.</h2>
-        <p class="lead">Everything a board is responsible for, in one place — the structure to run it right without a pro, and an audit trail the next board inherits.</p>
+        <p class="lead">Everything a board is responsible for, in one place — the structure to run it right without a pro, and an audit trail the next board inherits. <strong style="color:var(--text)">Click any tile to see it in the product.</strong></p>
       </div>
       <div class="feat">
-        <div class="card">
+        <div class="card clk" role="button" tabindex="0" onclick="openPV('finances')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPV('finances')}">
           <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
           <h3>Finances on autopilot</h3>
           <p>A real double-entry ledger behind the scenes — dues, bills, reserves, and board-ready reports. No accounting degree required.</p>
+          <span class="see">See it <span class="arrow">→</span></span>
         </div>
-        <div class="card">
+        <div class="card clk" role="button" tabindex="0" onclick="openPV('approvals')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPV('approvals')}">
           <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-3.5 7.5-8.5 9C7.5 19.5 4 17 4 12V6l8.5-3L21 6z"/></svg></div>
           <h3>Invoice approvals, then auto-pay</h3>
           <p>Vendor bills notify the board, collect the approval quorum you set, and pay the moment the votes are in — every step recorded.</p>
+          <span class="see">See it <span class="arrow">→</span></span>
         </div>
-        <div class="card">
+        <div class="card clk" role="button" tabindex="0" onclick="openPV('banksync')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPV('banksync')}">
           <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg></div>
           <h3>Bank sync &amp; reconciliation</h3>
           <p>Connect the association’s account and the books reconcile against the bank automatically — flagging anything that doesn’t match.</p>
+          <span class="see">See it <span class="arrow">→</span></span>
         </div>
-        <div class="card">
+        <div class="card clk" role="button" tabindex="0" onclick="openPV('compliance')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPV('compliance')}">
           <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"/></svg></div>
           <h3>Compliance &amp; filings handled</h3>
           <p>Deadlines, required notices, 1099s, and state filings tracked and prepared — so the board never misses the thing that creates liability.</p>
+          <span class="see">See it <span class="arrow">→</span></span>
         </div>
-        <div class="card">
+        <div class="card clk" role="button" tabindex="0" onclick="openPV('answers')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPV('answers')}">
           <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
           <h3>Homeowners get instant answers</h3>
           <p>Residents ask a question and get an answer straight from your CC&amp;Rs, with the exact section cited. Only the real exceptions reach the board.</p>
+          <span class="see">See it <span class="arrow">→</span></span>
         </div>
-        <div class="card">
+        <div class="card clk" role="button" tabindex="0" onclick="openPV('violations')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPV('violations')}">
           <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h12"/></svg></div>
           <h3>Violations &amp; ARC requests, tracked fairly</h3>
           <p>Architectural requests and violations follow the same rules every time, with a record you can stand behind at a hearing.</p>
+          <span class="see">See it <span class="arrow">→</span></span>
         </div>
       </div>
     </div>
@@ -427,25 +516,23 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
     <div class="wrap">
       <div class="sec-head">
         <div class="eyebrow">Getting started</div>
-        <h2>Upload your documents. The rest sets itself up.</h2>
-        <p class="lead">You don’t configure software. You hand over what the community already has, and HOABoard builds your community for you.</p>
+        <h2>You set it up yourself — in about an hour.</h2>
+        <p class="lead">No onboarding calls, no consultants, no waiting on a management company. HOABoard walks your board through a short checklist and builds your community as you check each box off.</p>
       </div>
-      <div class="steps">
-        <div class="step">
-          <h3>Upload your governing docs</h3>
-          <p>Drag in your CC&amp;Rs, bylaws, amendments, and management certificate. Scanned PDFs are read with OCR.</p>
-        </div>
-        <div class="step">
-          <h3>HOABoard reads and sets up</h3>
-          <p>Your rules are extracted, tagged by topic, and made searchable — so they go live the moment they’re read.</p>
-        </div>
-        <div class="step">
-          <h3>Go live &amp; invite your board</h3>
-          <p>Import your owner roster, connect payments if you want them, and open the dashboard. Most boards finish in under an hour.</p>
-        </div>
+      <div class="checklist" role="img" aria-label="Setup checklist, four of five steps complete">
+        <div class="cl-head"><b>Your setup checklist</b><span class="cl-prog">4 of 5 done</span></div>
+        <div class="cl-bar"><i></i></div>
+        <ul>
+          <li class="done"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Upload your governing docs — CC&amp;Rs, bylaws, amendments</li>
+          <li class="done"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Import your owner roster</li>
+          <li class="done"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Set your dues &amp; assessment schedule</li>
+          <li class="done"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Invite your board members</li>
+          <li><span class="box"></span> Connect your bank <span class="opt">— optional</span></li>
+        </ul>
+        <p class="cl-foot">No consultant, no onboarding fee. Your board checks the boxes, and you’re live.</p>
       </div>
-      <div class="cta-row" style="margin-top:40px">
-        <a class="btn btn-primary" href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">Start setting up your community <span class="arrow">→</span></a>
+      <div class="cta-row" style="margin-top:36px;justify-content:center">
+        <a class="btn btn-primary" href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">Start your checklist <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -503,11 +590,114 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
   </div>
 </footer>
 
+<!-- PRODUCT VIEW MODAL -->
+<div class="modal" id="pvModal" role="dialog" aria-modal="true" aria-labelledby="pvTitle" onclick="if(event.target===this)closePV()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><div class="mt" id="pvTitle">Feature</div><div class="ms" id="pvSub"></div></div>
+      <button class="modal-close" onclick="closePV()" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="pv-panel" id="pv-finances">
+        <div class="pv-win">
+          <div class="pv-kpis">
+            <div class="pv-kpi"><div class="v num">$85,566</div><div class="l">Total cash</div></div>
+            <div class="pv-kpi"><div class="v num pos">+$2,124</div><div class="l">Dues this week</div></div>
+            <div class="pv-kpi"><div class="v num neg">3.1%</div><div class="l">Delinquency</div></div>
+          </div>
+          <div class="pv-row"><div><div class="l">Dues received — 18 homes</div><div class="sub">Apr 1 · auto-posted to the ledger</div></div><div class="pv-amt pos">+$2,124.00</div></div>
+          <div class="pv-row"><div><div class="l">Greenscape Landscaping</div><div class="sub">Apr 1 · operating</div></div><div class="pv-amt neg">−$850.00</div></div>
+          <div class="pv-row"><div><div class="l">Lot 114 — past due</div><div class="sub">42 days · late fee applied</div></div><div class="pv-amt neg">−$318.60</div></div>
+        </div>
+        <p class="cl-foot">Money in reads green, money owed reads red — a real double-entry ledger, board-ready.</p>
+      </div>
+
+      <div class="pv-panel" id="pv-approvals">
+        <div class="pv-win">
+          <div class="pv-bar"><span class="dot"></span> Vendor bills · board approvals</div>
+          <div class="pv-row"><div><div class="l">Pool service — AquaTech</div><div class="sub">Due Apr 15 · auto-pays at quorum</div></div><div style="text-align:right"><div class="pv-amt">$420.00</div><span class="pv-badge b-wait">2 of 3 approved</span></div></div>
+          <div class="pv-row"><div><div class="l">Irrigation repair — GreenFlow</div><div class="sub">Quorum met · auto-paid Apr 3</div></div><div style="text-align:right"><div class="pv-amt">$1,180.00</div><span class="pv-badge b-ok">Paid</span></div></div>
+          <div class="pv-row"><div><div class="l">Fence rebuild — over budget</div><div class="sub">Exceeds the reserve line</div></div><div style="text-align:right"><div class="pv-amt neg">$3,900.00</div><span class="pv-badge b-bad">Needs review</span></div></div>
+        </div>
+        <p class="cl-foot">Bills pay themselves the moment your approval quorum is met — every vote recorded.</p>
+      </div>
+
+      <div class="pv-panel" id="pv-banksync">
+        <div class="pv-win">
+          <div class="pv-bar"><span class="dot"></span> Bank reconciliation · last sync 2h ago</div>
+          <div class="pv-row"><div class="l">Dues deposit — +$2,124.00</div><span class="pv-badge b-ok">Matched</span></div>
+          <div class="pv-row"><div class="l">Landscaping — −$850.00</div><span class="pv-badge b-ok">Matched</span></div>
+          <div class="pv-row"><div><div class="l">Unknown debit — −$120.00</div><div class="sub">No matching entry in the books</div></div><span class="pv-badge b-bad">Flagged</span></div>
+        </div>
+        <p class="cl-foot">The books reconcile to the bank automatically — anything that doesn’t match is flagged in red.</p>
+      </div>
+
+      <div class="pv-panel" id="pv-compliance">
+        <div class="pv-win">
+          <div class="pv-bar"><span class="dot"></span> Compliance calendar</div>
+          <div class="pv-row"><div><div class="l">Annual meeting notice (§3.05)</div><div class="sub">Sent Mar 2 · within the notice window</div></div><span class="pv-badge b-ok">Done</span></div>
+          <div class="pv-row"><div><div class="l">1099-NEC to vendors</div><div class="sub">Prepared · ready to file</div></div><span class="pv-badge b-wait">Ready</span></div>
+          <div class="pv-row"><div><div class="l">State corporate report</div><div class="sub">Due in 9 days</div></div><span class="pv-badge b-bad">Due soon</span></div>
+        </div>
+        <p class="cl-foot">Deadlines, notices, and filings tracked and prepared — nothing that creates liability slips.</p>
+      </div>
+
+      <div class="pv-panel" id="pv-answers">
+        <div class="pv-win">
+          <div class="pv-bar"><span class="dot"></span> Homeowner questions</div>
+          <div class="pv-qa">
+            <div class="q">“What colors can I stain my fence?”</div>
+            <div class="a">Cedar, Sierra, Brick Red, Russet, or Walnut — no ARC approval needed for a color on this list.</div>
+            <div class="src">✓ Cited: Fence Resolution, §3</div>
+          </div>
+          <div class="pv-qa">
+            <div class="q">“When are dues considered late?”</div>
+            <div class="a">Dues are due the 1st; a late fee applies after a 10-day grace period.</div>
+            <div class="src">✓ Cited: Collection Policy, §2.1</div>
+          </div>
+        </div>
+        <p class="cl-foot">Residents get answers straight from your CC&amp;Rs — only the real exceptions reach the board.</p>
+      </div>
+
+      <div class="pv-panel" id="pv-violations">
+        <div class="pv-win">
+          <div class="pv-bar"><span class="dot"></span> Violations · enforcement ladder</div>
+          <div class="pv-row"><div><div class="l">Lot 22 — trash bins visible</div><div class="sub">Courtesy notice sent Apr 2</div></div><span class="pv-badge b-wait">Stage 1</span></div>
+          <div class="pv-row"><div><div class="l">Lot 57 — unapproved shed</div><div class="sub">Fine assessed · hearing Apr 20</div></div><span class="pv-badge b-bad">Fine + hearing</span></div>
+          <div class="pv-row"><div><div class="l">Lot 9 — lawn maintenance</div><div class="sub">Corrected · closed Apr 5</div></div><span class="pv-badge b-ok">Closed</span></div>
+        </div>
+        <p class="cl-foot">Every case follows the same ladder, with a record you can stand behind at a hearing.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
   // sticky nav border on scroll
   var nav=document.getElementById('nav');
   var onScroll=function(){ nav.classList.toggle('scrolled', window.scrollY>8); };
   onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+
+  // product-view modal
+  var PV={
+    finances:['Finances on autopilot','Positives in green, what’s owed in red — a real ledger.'],
+    approvals:['Invoice approvals, then auto-pay','Board approves; HOABoard pays when quorum is met.'],
+    banksync:['Bank sync & reconciliation','Books matched to the bank automatically.'],
+    compliance:['Compliance & filings handled','Deadlines, notices, and filings tracked and prepared.'],
+    answers:['Homeowners get instant answers','Answered from your CC&Rs, with the section cited.'],
+    violations:['Violations & ARC, tracked fairly','One consistent enforcement ladder, fully recorded.']
+  };
+  function openPV(k){
+    var m=document.getElementById('pvModal');
+    document.querySelectorAll('.pv-panel').forEach(function(p){p.classList.remove('on')});
+    var el=document.getElementById('pv-'+k); if(el)el.classList.add('on');
+    if(PV[k]){ document.getElementById('pvTitle').textContent=PV[k][0]; document.getElementById('pvSub').textContent=PV[k][1]; }
+    m.classList.add('open'); document.body.style.overflow='hidden';
+  }
+  function closePV(){ document.getElementById('pvModal').classList.remove('open'); document.body.style.overflow=''; }
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape')closePV(); });
 </script>
 </body>
 </html>
