@@ -360,7 +360,7 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
           <circle cx="560" cy="20" r="4" fill="var(--positive)"/>
         </svg>
         <div class="dash-tiles">
-          <div class="dtile"><div class="v num">$11,063</div><div class="l">Operating</div></div>
+          <div class="dtile"><div class="v num">$11,062</div><div class="l">Operating</div></div>
           <div class="dtile"><div class="v num">$74,504</div><div class="l">Reserves</div></div>
           <div class="dtile"><div class="v num">3.1%</div><div class="l">Delinquency</div></div>
         </div>
@@ -380,7 +380,7 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
         <div class="kpi">
           <div class="kpi-label">Kept in the community</div>
           <div class="kpi-num num">$15,000<span class="kpi-unit">+/yr</span></div>
-          <div class="kpi-sub">What a 132-home board stops paying a management company — money that stays in your reserves.</div>
+          <div class="kpi-sub">A 132-home board’s net savings versus a management company — money that stays in your reserves.</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">Setup fees &amp; contracts</div>
@@ -706,7 +706,7 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
         <div class="calc-stat"><span class="l">A management company — over 5 years</span><span class="v neg" id="cMgmt5">—</span></div>
         <div class="calc-stat big"><span class="l">Kept in your community with HOABoard — per year*</span><span class="v pos" id="cSaveYr">—</span></div>
       </div>
-      <p class="calc-note">*Versus a typical flat self-managed software fee (about $1,740/yr). HOABoard is a flat monthly subscription — a fraction of per-door pricing — so most of the gap stays in your reserves. Your exact price is set during onboarding.</p>
+      <p class="calc-note">*Versus a typical flat self-managed software fee (about $1,740/yr) — not HOABoard’s own pricing. HOABoard is a flat monthly subscription, a fraction of per-door pricing, so most of the gap stays in your reserves. Your exact subscription, plus any third-party processing or bank fees, is set during onboarding and isn’t included in this estimate.</p>
       <a class="btn btn-primary" href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">Set up your community <span class="arrow">→</span></a>
     </div>
   </div>
@@ -727,14 +727,16 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
     answers:['Homeowners get instant answers','Answered from your CC&Rs, with the section cited.'],
     violations:['Violations & ARC, tracked fairly','One consistent enforcement ladder, fully recorded.']
   };
+  var __lastFocus=null;
   function openPV(k){
     var m=document.getElementById('pvModal');
     document.querySelectorAll('.pv-panel').forEach(function(p){p.classList.remove('on')});
     var el=document.getElementById('pv-'+k); if(el)el.classList.add('on');
     if(PV[k]){ document.getElementById('pvTitle').textContent=PV[k][0]; document.getElementById('pvSub').textContent=PV[k][1]; }
-    m.classList.add('open'); document.body.style.overflow='hidden';
+    __lastFocus=document.activeElement; m.classList.add('open'); document.body.style.overflow='hidden';
+    var cb=m.querySelector('.modal-close'); if(cb)cb.focus();
   }
-  function closePV(){ document.getElementById('pvModal').classList.remove('open'); document.body.style.overflow=''; }
+  function closePV(){ document.getElementById('pvModal').classList.remove('open'); document.body.style.overflow=''; if(__lastFocus&&__lastFocus.focus)__lastFocus.focus(); }
 
   // savings calculator
   function fmtMoney(id,n){ var el=document.getElementById(id); if(el) el.textContent='$'+Math.round(Math.max(0,n)).toLocaleString('en-US'); }
@@ -744,8 +746,8 @@ footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
     var mgmtYr=homes*fee*12, swYr=1740;
     fmtMoney('cMgmtYr',mgmtYr); fmtMoney('cMgmt5',mgmtYr*5); fmtMoney('cSaveYr',mgmtYr-swYr);
   }
-  function openCalc(){ var m=document.getElementById('calcModal'); m.classList.add('open'); document.body.style.overflow='hidden'; calcRun(); }
-  function closeCalc(){ document.getElementById('calcModal').classList.remove('open'); document.body.style.overflow=''; }
+  function openCalc(){ var m=document.getElementById('calcModal'); __lastFocus=document.activeElement; m.classList.add('open'); document.body.style.overflow='hidden'; calcRun(); var i=document.getElementById('cHomes'); if(i)i.focus(); }
+  function closeCalc(){ document.getElementById('calcModal').classList.remove('open'); document.body.style.overflow=''; if(__lastFocus&&__lastFocus.focus)__lastFocus.focus(); }
 
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closePV(); closeCalc(); } });
 </script>
