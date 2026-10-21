@@ -1,189 +1,513 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HOABoard.ai — Community operations, done for you</title>
-<meta name="description" content="HOABoard answers homeowner questions instantly from the community's own rules, gives boards live visibility, and lets managers approve with one tap. For self-managed boards, boards with a management company, and management companies.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HOABoard — Self-management for HOA boards</title>
+<meta name="description" content="Run your HOA without a management company — and keep the money in the community. HOABoard handles the books, filings, violations, and homeowner questions, so a volunteer board can self-manage in an evening a month, not a second job.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F5F7FB;--white:#fff;--blue:#2563EB;--blue-dark:#1D4ED8;--blue-lt:#EFF4FF;--navy:#0F1E3D;--ink:#1B2B4B;--line:#DFE6F0;--mid:#5B6B8C;--dim:#8B98B3;--green:#16A34A;--rose:#DC2626}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
-.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
-nav{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
-.nav-in{display:flex;align-items:center;gap:10px;padding:12px 24px;max-width:1000px;margin:0 auto}
-.mark{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
-.nav-in>b{font-size:15px;color:var(--navy)}
-.nav-cta{margin-left:auto;background:var(--blue);color:#fff;padding:9px 16px;border-radius:9px;font-size:13px;font-weight:700;text-decoration:none}
-.hero{padding:56px 0 8px;text-align:center}
-h1{font-size:clamp(30px,4.8vw,48px);font-weight:900;color:var(--navy);letter-spacing:-.02em;line-height:1.1;margin-bottom:14px}
-h1 span{color:var(--blue)}
-.sub{font-size:clamp(15px,2vw,18px);color:var(--mid);max-width:620px;margin:0 auto}
-.switch{display:flex;gap:8px;justify-content:center;margin:30px auto 0;background:var(--white);border:1.5px solid var(--line);border-radius:14px;padding:6px;max-width:520px}
-.switch button{flex:1;padding:13px 10px;border:none;border-radius:10px;background:none;font-family:inherit;font-size:14px;font-weight:800;color:var(--mid);cursor:pointer}
-.switch button.on{background:var(--blue);color:#fff}
-section{padding:44px 0}
-h2{font-size:clamp(22px,3vw,30px);font-weight:900;color:var(--navy);text-align:center;margin-bottom:8px}
-.lead{text-align:center;color:var(--mid);font-size:15px;max-width:600px;margin:0 auto 30px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px}
-.card .ic{font-size:22px}
-.card h3{font-size:15.5px;font-weight:800;color:var(--navy);margin:8px 0 5px}
-.card p{font-size:13px;color:var(--mid)}
-.vs{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;max-width:840px;margin:0 auto}
-.vs table{width:100%;border-collapse:collapse;font-size:13.5px}
-.vs th{background:var(--navy);color:#fff;padding:13px;text-align:left;font-size:12.5px}
-.vs th:last-child{background:var(--blue)}
-.vs td{padding:11px 13px;border-top:1px solid var(--line);vertical-align:top}
-.vs td:first-child{font-weight:700;color:var(--navy);width:34%}
-.vs td:last-child{background:var(--blue-lt)}
-.dark{background:var(--navy);border-radius:20px;padding:38px 30px;color:#fff;text-align:center}
-.dark h2{color:#fff}
-.btn{display:inline-block;padding:13px 24px;border-radius:10px;font-size:14.5px;font-weight:800;text-decoration:none;border:none;font-family:inherit;cursor:pointer}
-.btn-p{background:var(--blue);color:#fff}
-.btn-w{background:#fff;color:var(--navy)}
-footer{padding:34px 24px;text-align:center;color:var(--dim);font-size:12px}
-.view{display:none}.view.on{display:block}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(15,30,61,.55);z-index:100;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
-.modal-bg.on{display:flex}
-.modal{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:28px;position:relative}
-.modal .x{position:absolute;top:10px;right:14px;border:none;background:none;font-size:22px;color:var(--dim);cursor:pointer}
-.modal h3{font-size:19px;font-weight:900;color:var(--navy);margin-bottom:4px}
-.modal .msub{font-size:12.5px;color:var(--mid);margin-bottom:12px}
-.modal label{display:block;font-size:11.5px;font-weight:700;color:var(--navy);margin:11px 0 4px}
-.modal input,.modal select,.modal textarea{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit}
-.modal button[type=submit]{width:100%;margin-top:16px;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:14.5px;font-weight:800;font-family:inherit;cursor:pointer}
-.ok-msg{display:none;text-align:center;padding:28px 8px}
+:root{
+  /* canvas & surfaces */
+  --bg:#FBFBFC; --surface:#FFFFFF; --surface-2:#F4F5F7; --surface-sunken:#EEF0F3;
+  /* text */
+  --text:#0B0D12; --text-secondary:#5A6474; --text-tertiary:#8A93A3;
+  /* borders */
+  --border:#E4E7EC; --border-strong:#D2D7DF;
+  /* brand + accent */
+  --brand:#00875A; --brand-hover:#006E49; --brand-weak:#E6F4EF; --brand-ink:#00A35C;
+  /* data / status */
+  --positive:#00C46A; --positive-weak:#E3FBEF; --positive-ink:#00844B;
+  --negative:#F0453A; --negative-weak:#FDECEA; --warning:#F5A623;
+  /* dark band surfaces (used for problem + final CTA inside a light page) */
+  --ink-bg:#07090D; --ink-surface:#0E1218; --ink-surface-2:#161B23;
+  --ink-text:#F4F6F9; --ink-text-2:#9AA4B2; --ink-border:#1E242D; --ink-green:#00D27A;
+  /* type + metrics */
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --maxw:1200px;
+  --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;--s-9:96px;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:24px;--r-pill:999px;
+  --shadow-sm:0 1px 2px rgba(11,13,18,.04),0 1px 1px rgba(11,13,18,.03);
+  --shadow-md:0 4px 12px rgba(11,13,18,.06),0 1px 3px rgba(11,13,18,.04);
+  --shadow-lg:0 18px 48px rgba(11,13,18,.10),0 4px 12px rgba(11,13,18,.05);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#07090D; --surface:#0E1218; --surface-2:#161B23; --surface-sunken:#0A0D12;
+  --text:#F4F6F9; --text-secondary:#9AA4B2; --text-tertiary:#6B7483;
+  --border:#1E242D; --border-strong:#2A313C;
+  --brand:#00D27A; --brand-hover:#2BE093; --brand-weak:#0E2A21; --brand-ink:#00E676;
+  --positive:#00E676; --positive-weak:#0E2A1D; --positive-ink:#38E98C; --negative:#FF5A4E;
+  --ink-bg:#05070A; --ink-surface:#0C0F15; --ink-surface-2:#141A22; --ink-border:#20272F;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow-md:0 6px 16px rgba(0,0,0,.5);
+  --shadow-lg:0 20px 50px rgba(0,0,0,.6); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#07090D; --surface:#0E1218; --surface-2:#161B23; --surface-sunken:#0A0D12;
+  --text:#F4F6F9; --text-secondary:#9AA4B2; --text-tertiary:#6B7483;
+  --border:#1E242D; --border-strong:#2A313C;
+  --brand:#00D27A; --brand-hover:#2BE093; --brand-weak:#0E2A21; --brand-ink:#00E676;
+  --positive:#00E676; --positive-weak:#0E2A1D; --positive-ink:#38E98C; --negative:#FF5A4E;
+  --ink-bg:#05070A; --ink-surface:#0C0F15; --ink-surface-2:#141A22; --ink-border:#20272F;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow-md:0 6px 16px rgba(0,0,0,.5);
+  --shadow-lg:0 20px 50px rgba(0,0,0,.6); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.6;
+  letter-spacing:-.006em;font-feature-settings:'tnum','cv11';-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3{margin:0;font-weight:700}
+h1{font-size:clamp(2.4rem,6vw,3.75rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;text-wrap:balance}
+h2{font-size:clamp(2rem,4vw,2.5rem);line-height:1.1;letter-spacing:-.025em;text-wrap:balance}
+h3{font-size:1.375rem;font-weight:600;line-height:1.25;letter-spacing:-.015em}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+.num{font-feature-settings:'tnum'}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:max(24px,env(safe-area-inset-left,0px))}
+@media(max-width:640px){.wrap{padding-inline:16px}}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-ink)}
+.lead{font-size:1.1875rem;line-height:1.6;color:var(--text-secondary);letter-spacing:-.01em}
+.muted{color:var(--text-secondary)}
+section{padding-block:clamp(56px,9vw,96px)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-sans);font-weight:600;font-size:16px;
+  padding:14px 24px;border-radius:var(--r-pill);border:1.5px solid transparent;cursor:pointer;transition:transform .15s,background .15s,border-color .15s,box-shadow .15s;white-space:nowrap}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:var(--shadow-sm)}
+.btn-primary:hover{background:var(--brand-hover);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.btn-ghost{border-color:var(--border-strong);color:var(--text);background:transparent}
+.btn-ghost:hover{border-color:var(--text-tertiary)}
+.arrow{transition:transform .15s}.btn:hover .arrow{transform:translateX(3px)}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+header.nav.scrolled{border-bottom-color:var(--border)}
+.nav-in{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.02em}
+.brand .mk{width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,var(--brand),#38d08f);
+  display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800}
+.nav-links{display:flex;gap:28px;margin-left:16px;font-size:15px;font-weight:500;color:var(--text-secondary)}
+.nav-links a:hover{color:var(--text)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.nav-right .btn{padding:10px 18px;font-size:15px}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-10% -20% auto auto;width:70%;height:620px;z-index:0;
+  background:radial-gradient(ellipse at top right,var(--brand-weak),transparent 62%);pointer-events:none}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,64px);align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:44px}}
+.hero h1 .hl{color:var(--brand-ink)}
+.hero .lead{margin-top:22px;max-width:46ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.trust{display:flex;flex-wrap:wrap;gap:18px;margin-top:26px;font-size:14px;font-weight:500;color:var(--text-tertiary)}
+.trust span{display:inline-flex;align-items:center;gap:7px}
+.trust svg{color:var(--brand);flex:none}
+
+/* dashboard card (hero visual) */
+.dash{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);box-shadow:var(--shadow-lg);
+  padding:22px;position:relative}
+.dash-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.dash-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary)}
+.dash-big{font-size:2.5rem;font-weight:700;letter-spacing:-.02em;line-height:1;margin-top:8px}
+.dash-delta{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:600;color:var(--positive-ink)}
+.dash-delta em{font-style:normal;font-weight:500;color:var(--text-tertiary)}
+.pill{background:var(--positive-weak);color:var(--positive-ink);border-radius:var(--r-pill);padding:4px 10px;font-size:12px;font-weight:600}
+.dash-chart{width:100%;height:120px;display:block;margin:14px 0 4px}
+.dash-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.dtile{background:var(--surface-2);border-radius:var(--r-md);padding:12px 13px}
+.dtile .v{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.dtile .l{font-size:11.5px;color:var(--text-tertiary);margin-top:3px;font-weight:500}
+.qa{margin-top:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 14px}
+.qa .q{font-size:12.5px;font-weight:600;color:var(--text-secondary)}
+.qa .a{font-size:12.5px;line-height:1.45;margin-top:6px}
+.qa .src{font-size:11px;font-weight:600;color:var(--brand-ink);margin-top:8px;display:inline-flex;gap:5px;align-items:center}
+
+/* KPI proof band */
+.proof{background:var(--surface-2);border-block:1px solid var(--border)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.kpis{grid-template-columns:1fr}}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow-sm)}
+.kpi-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary)}
+.kpi-num{font-size:2.6rem;font-weight:700;letter-spacing:-.02em;line-height:1;margin:12px 0 8px}
+.kpi-unit{font-size:1.4rem;font-weight:600;color:var(--text-secondary);margin-left:2px}
+.kpi-sub{font-size:14px;color:var(--text-secondary);line-height:1.5}
+
+/* generic section head */
+.sec-head{max-width:46ch}
+.sec-head h2{margin-top:14px}
+.sec-head p{margin-top:14px}
+.center{margin-inline:auto;text-align:center}
+
+/* dark band */
+.band{background:var(--ink-bg);color:var(--ink-text)}
+.band h2{color:var(--ink-text)}
+.band .eyebrow{color:var(--ink-green)}
+.band p{color:var(--ink-text-2)}
+.paths{display:grid;grid-template-columns:1fr auto 1fr;gap:22px;margin-top:40px;align-items:center}
+@media(max-width:760px){.paths{grid-template-columns:1fr;gap:14px}}
+.path{background:var(--ink-surface);border:1px solid var(--ink-border);border-radius:var(--r-lg);padding:28px}
+.path .tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#FF8C82}
+.path h3{color:var(--ink-text);margin-top:8px}
+.path p{color:var(--ink-text-2);margin-top:10px;font-size:15px}
+.path-or{font-weight:600;color:var(--ink-text-2);text-align:center;font-size:14px}
+
+/* features */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:900px){.feat{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.feat{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;transition:transform .15s,box-shadow .15s,border-color .15s}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--border-strong)}
+.card .ic{width:40px;height:40px;border-radius:var(--r-md);display:grid;place-items:center;margin-bottom:16px;
+  background:var(--brand-weak);color:var(--brand-ink)}
+.card h3{font-size:1.1875rem}
+.card p{color:var(--text-secondary);margin-top:8px;font-size:15px}
+
+/* cost chart section */
+.cost-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,56px);align-items:center;margin-top:8px}
+@media(max-width:900px){.cost-grid{grid-template-columns:1fr;gap:32px}}
+.cost-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:26px;box-shadow:var(--shadow-md)}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:8px;font-size:13.5px;font-weight:600}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend .dot{width:12px;height:3px;border-radius:2px;display:inline-block}
+.cost-note{font-size:13px;color:var(--text-tertiary);margin-top:14px}
+.save-pop{font-size:14px;font-weight:600;color:var(--brand-ink);margin-top:18px}
+.save-pop .big{font-size:2rem;font-weight:800;letter-spacing:-.02em;display:block;color:var(--text)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;counter-reset:s}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.step{padding-top:18px;border-top:2px solid var(--brand)}
+.step::before{counter-increment:s;content:"0" counter(s);font-size:14px;font-weight:700;color:var(--brand-ink);letter-spacing:.04em}
+.step h3{margin-top:10px}
+.step p{color:var(--text-secondary);margin-top:10px;font-size:15px}
+
+/* compare */
+.cmp-wrap{margin-top:40px;overflow-x:auto;border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
+table.cmp{width:100%;border-collapse:collapse;min-width:620px;font-size:15px;background:var(--surface)}
+table.cmp th,table.cmp td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--border)}
+table.cmp thead th{font-weight:600;font-size:15px}
+table.cmp thead th.us{color:var(--brand-ink)}
+table.cmp tbody th{font-weight:500;color:var(--text-secondary);font-size:14.5px}
+.col-us{background:var(--brand-weak)}
+table.cmp td.us{font-weight:600}
+table.cmp td .mk{color:var(--brand);font-weight:700;margin-right:7px}
+table.cmp td .x{color:var(--text-tertiary);margin-right:7px}
+table.cmp tr:last-child th,table.cmp tr:last-child td{border-bottom:none}
+
+/* final cta */
+.final{background:var(--ink-bg);color:var(--ink-text);border-radius:var(--r-xl);padding:clamp(40px,7vw,72px);text-align:center;box-shadow:var(--shadow-lg)}
+.final h2{color:var(--ink-text)}
+.final p{color:var(--ink-text-2);margin:16px auto 0;max-width:48ch}
+.final .cta-row{justify-content:center}
+.final .btn-ghost{color:var(--ink-text);border-color:rgba(255,255,255,.22)}
+.final .btn-ghost:hover{border-color:rgba(255,255,255,.5)}
+.final .trust{justify-content:center;color:var(--ink-text-2)}
+
+footer{border-top:1px solid var(--border);padding-block:32px;margin-top:8px}
+.foot{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:14px;color:var(--text-tertiary)}
+.foot nav{margin-left:auto;display:flex;gap:22px}
+.foot nav a:hover{color:var(--text)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 </style>
 </head>
-<body>
-<nav><div class="nav-in"><div class="mark">H</div><b>HOABoard.ai</b>
-<a class="nav-cta" href="#" onclick="openDemo();return false">Get a demo</a></div></nav>
+<body id="top">
 
-<div class="hero wrap">
-  <h1>Running an HOA is a job.<br><span>HOABoard does it for you.</span></h1>
-  <p class="sub">Homeowner questions get answered instantly from the community's own rules. Boards see everything — money, requests, meetings — in one place. Managers approve with one tap instead of writing every email. Works for self-managed boards, boards with a management company, and the management companies themselves.</p>
-  <div style="margin-top:34px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--dim)">SEE HOW IT WORKS FOR YOU</div>
-  <div class="switch" style="margin-top:10px">
-    <button id="swB" class="on" onclick="setView('boards')">I'm on an HOA board</button>
-    <button id="swM" onclick="setView('mgmt')">I run a management company</button>
-  </div>
-</div>
-
-<!-- ═══════════ VIEW 1: SELF-MANAGED BOARDS ═══════════ -->
-<div class="view on" id="view-boards">
-<section><div class="wrap">
-  <h2>The tools your board actually deserves</h2>
-  <p class="lead">Whether you're fully self-managed or working with a management company, HOABoard gives your board what today's tools don't: instant cited answers, live visibility, and one-tap approvals.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:26px">
-    <div class="card"><div class="ic">🧑‍🌾</div><h3>Self-managed board</h3><p>HOABoard does the daily work end-to-end — answers, letters, billing, meetings — and your board just reviews and approves. No management company needed.</p></div>
-    <div class="card"><div class="ic">🤝</div><h3>Board with a management company</h3><p>Tired of portals that show nothing and replies that take a week? HOABoard sits on top: you see the money, the questions, and every request live — payments and accounting stay exactly where they are with your manager and bank.</p></div>
-  </div>
-  <div class="vs"><table>
-    <tr><th>When this happens…</th><th>…HOABoard does this</th></tr>
-    <tr><td>A homeowner asks "what are the fence rules?"</td><td>The homeowner gets an instant answer taken from your community's recorded rules, with the exact section quoted. A board member approves it with one tap. If the rules don't cover it, the question goes to the board — the system never guesses.</td></tr>
-    <tr><td>Dues need collecting (self-managed)</td><td>Invoices go out automatically on your schedule. Owners on autopay are charged without lifting a finger. Late fees and reminders handle themselves. Every dollar lands in the association's own bank account. With a management company? Billing stays with them — HOABoard just gives you the visibility.</td></tr>
-    <tr><td>A violation needs a notice</td><td>A proper Texas-compliant letter, citing the violated rule, checked against how similar cases were handled before — so no one can claim favoritism. Certified mail in one click.</td></tr>
-    <tr><td>Someone wants to build a fence or repaint</td><td>Requests come in online, deadlines are tracked with warnings, past decisions shown for comparison, and the committee votes and decides.</td></tr>
-    <tr><td>The annual meeting approaches</td><td>A bylaws-compliant notice goes to every owner; RSVPs and proxies count live toward quorum. Elections send one secure ballot link per home.</td></tr>
-    <tr><td>A house is being sold</td><td>The Texas resale certificate generates in seconds from live records — and the fee is invoiced automatically.</td></tr>
-  </table></div>
-</div></section>
-
-<section style="padding-top:0"><div class="wrap" style="text-align:center">
-  <a class="btn btn-p" href="#" onclick="openDemo();return false">See it on your community's documents</a>
-</div></section>
-</div>
-
-<!-- ═══════════ VIEW 2: MANAGEMENT COMPANIES ═══════════ -->
-<div class="view" id="view-mgmt">
-<section><div class="wrap">
-  <h2>Serve more communities. Same team. Your brand.</h2>
-  <p class="lead">Managers drown in repeat questions, and boards feel blind between monthly packets. HOABoard fixes both: instant document-cited answers your manager approves with one tap, and self-service dashboards that let board members be hands-on without calling your team. Under your brand. Inside your process.</p>
-  <div class="grid">
-    <div class="card"><div class="ic">🧑‍💻</div><h3>Hands-on boards, fewer calls</h3><p>Board members get live dashboards — money, questions, requests, meetings — so they self-serve instead of emailing your managers. Happier boards, longer contracts.</p></div>
-    <div class="card"><div class="ic">🏷</div><h3>Your brand, your portal</h3><p>Board and homeowner portals carry your company's name, colors, and domain. Clients see you — powered quietly by HOABoard.</p></div>
-    <div class="card"><div class="ic">🧾</div><h3>Cited, never guessed</h3><p>Every answer quotes the exact section of that community's recorded documents. Anything the documents don't cover routes to your manager — the system never guesses.</p></div>
-    <div class="card"><div class="ic">📉</div><h3>Responses in seconds, not days</h3><p>Routine questions — fence rules, pool hours, meetings — answered instantly with the section cited. Payment and balance questions auto-route to your existing payment channels, using zero manager time.</p></div>
-    <div class="card"><div class="ic">👩‍💼</div><h3>Nothing goes out without your manager</h3><p>Every reply and notice is drafted and held for one-tap approval. Consistent quality across every portfolio manager — including the new hire in week one.</p></div>
-    <div class="card"><div class="ic">🗂</div><h3>Your stack stays</h3><p>Accounting, banking, violations, and your resident app stay exactly where they are. HOABoard is the communication layer on top, writing a clean record of every exchange back to the account file. No rip-and-replace.</p></div>
-    <div class="card"><div class="ic">📈</div><h3>More homes per manager = margin</h3><p>When routine communication runs itself, thousands of manager-hours a year come back to the company. That's headcount you don't hire — or homes you take on without hiring. Both land on margin.</p></div>
-    <div class="card"><div class="ic">🤝</div><h3>Rolled out by portfolio</h3><p>Per-home partner pricing. Communities convert in batches by portfolio manager, measured against your real baseline — response times and manager hours, reported per batch.</p></div>
-  </div>
-  <div style="text-align:center;margin-top:26px"><button class="btn btn-p" onclick="openDemo()">See a live demo on your communities' documents</button></div>
-</div></section>
-</div>
-
-<!-- ═══════════ SHARED: TRUST ═══════════ -->
-<section style="padding-top:0"><div class="wrap">
-  <h2>Built for trust</h2>
-  <p class="lead">Every answer comes straight from the community's recorded documents, with the section cited — the system never guesses. Every action is logged to the owner's record. And nothing reaches a homeowner until a board member or manager approves it with one tap.</p>
-</div></section>
-
-<footer>HOABoard.ai · <a href="mailto:satish.kodukula@gmail.com" style="color:var(--blue)">satish.kodukula@gmail.com</a></footer>
-
-<div class="modal-bg" id="demoModal" onclick="if(event.target===this)closeDemo()">
-  <div class="modal">
-    <button class="x" onclick="closeDemo()">✕</button>
-    <div id="demoForm">
-      <h3>Get a demo</h3>
-      <p class="msub">A 20-minute walkthrough — for boards, we run it on your community's own documents.</p>
-      <form id="demoF" onsubmit="return sendDemo(event)">
-        <label>Your name</label><input name="name" required placeholder="Jane Smith">
-        <label>Email</label><input name="email" type="email" required placeholder="jane@example.com">
-        <label>Organization</label><input name="community" required placeholder="Community or company name">
-        <label>I am…</label>
-        <select name="role" id="roleSel"><option>Board President</option><option>Treasurer</option><option>Secretary</option><option>Board Member</option><option>Homeowner</option><option>Management Company — Executive</option><option>Management Company — Community Manager</option></select>
-        <label>Homes (community) or homes managed (portfolio)</label>
-        <select name="homes"><option>Under 50</option><option>50–150</option><option selected>150–300</option><option>300–500</option><option>500–2,000</option><option>2,000+</option></select>
-        <label>Anything else? (optional)</label><textarea name="message" rows="2" placeholder="Biggest headache right now…"></textarea>
-        <input type="hidden" name="_subject" value="HOABoard demo request">
-        <button type="submit" id="demoBtn">Request my demo</button>
-      </form>
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="mk">H</span>HOABoard</a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">What your board gets</a>
+      <a href="#savings">The math</a>
+      <a href="#compare">Compare</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-primary" href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">Set up your community</a>
     </div>
-    <div class="ok-msg" id="demoOk"><div style="font-size:38px">✅</div><h3>Request received!</h3><p class="msub">We'll reach out within one business day.</p></div>
   </div>
-</div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">For self-managed HOA boards</div>
+        <h1 style="margin-top:16px">Run your HOA without a management company — <span class="hl">and keep the $15,000 a year.</span></h1>
+        <p class="lead">HOABoard gives your volunteer board everything a manager does — the books, the filings, the violations, the homeowner questions — for a flat fee that’s a fraction of per-door pricing. Self-manage in an evening a month, not a second job.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">Set up your community <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <div class="trust">
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg> No per-door fees</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg> No contracts or setup fees</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg> Your funds never leave your bank</span>
+        </div>
+      </div>
+
+      <!-- dashboard card -->
+      <div class="dash" aria-label="HOABoard dashboard preview">
+        <div class="dash-top">
+          <div>
+            <div class="dash-label">Total cash position</div>
+            <div class="dash-big num">$85,566</div>
+            <div class="dash-delta">▲ On track <em>reconciled to the bank today</em></div>
+          </div>
+          <span class="pill">Books balanced</span>
+        </div>
+        <svg class="dash-chart" viewBox="0 0 560 120" preserveAspectRatio="none" role="img" aria-label="Cash balance trending up">
+          <defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--positive)" stop-opacity=".20"/>
+            <stop offset="100%" stop-color="var(--positive)" stop-opacity="0"/>
+          </linearGradient></defs>
+          <g stroke="var(--border)" stroke-width="1"><line x1="0" y1="40" x2="560" y2="40"/><line x1="0" y1="80" x2="560" y2="80"/></g>
+          <path d="M0,96 L70,88 L140,92 L210,72 L280,76 L350,54 L420,48 L490,32 L560,20 L560,120 L0,120 Z" fill="url(#fill)"/>
+          <path d="M0,96 L70,88 L140,92 L210,72 L280,76 L350,54 L420,48 L490,32 L560,20" fill="none" stroke="var(--positive)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+          <circle cx="560" cy="20" r="4" fill="var(--positive)"/>
+        </svg>
+        <div class="dash-tiles">
+          <div class="dtile"><div class="v num">$11,063</div><div class="l">Operating</div></div>
+          <div class="dtile"><div class="v num">$74,504</div><div class="l">Reserves</div></div>
+          <div class="dtile"><div class="v num">3.1%</div><div class="l">Delinquency</div></div>
+        </div>
+        <div class="qa">
+          <div class="q">“What colors can I stain my fence?”</div>
+          <div class="a">Cedar, Sierra, Brick Red, Russet, or Walnut — no ARC approval needed for a color on this list.</div>
+          <div class="src"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Cited: Fence Resolution, §3</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF / KPI BAND -->
+  <section class="proof">
+    <div class="wrap">
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi-label">Kept in the community</div>
+          <div class="kpi-num num">$15,000<span class="kpi-unit">+/yr</span></div>
+          <div class="kpi-sub">What a 132-home board stops paying a management company — money that stays in your reserves.</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Setup fees &amp; contracts</div>
+          <div class="kpi-num num">$0</div>
+          <div class="kpi-sub">No onboarding fee, no lock-in. Start today, cancel anytime — the opposite of a management-company contract.</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">At every board turnover</div>
+          <div class="kpi-num num">100<span class="kpi-unit">%</span></div>
+          <div class="kpi-sub">Audit-ready. A full record and reconciled books hand over to the next board — nothing lost on a laptop.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM (dark band) -->
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">The two bad options</div>
+        <h2>Today, self-managed boards just get to pick their problem.</h2>
+      </div>
+      <div class="paths">
+        <div class="path">
+          <div class="tag">Option A — hire it out</div>
+          <h3>Pay a management company</h3>
+          <p>Often $10–$50 per door every month, plus setup fees that can run into the thousands and charges for transfers, resale packages, and “extras.” You still chase them for answers — and your community’s money runs through someone else’s trust account.</p>
+        </div>
+        <div class="path-or">— or —</div>
+        <div class="path">
+          <div class="tag">Option B — do it all yourself</div>
+          <h3>Drown in spreadsheets</h3>
+          <p>Dues in one file, the bank in another, a binder of CC&amp;Rs, and homeowner emails at 10pm. One treasurer burns out and the whole thing wobbles at the next election.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">What your board gets</div>
+        <h2>The work of a management company, run by software.</h2>
+        <p class="lead">Everything a board is responsible for, in one place — the structure to run it right without a pro, and an audit trail the next board inherits.</p>
+      </div>
+      <div class="feat">
+        <div class="card">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+          <h3>Finances on autopilot</h3>
+          <p>A real double-entry ledger behind the scenes — dues, bills, reserves, and board-ready reports. No accounting degree required.</p>
+        </div>
+        <div class="card">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-3.5 7.5-8.5 9C7.5 19.5 4 17 4 12V6l8.5-3L21 6z"/></svg></div>
+          <h3>Invoice approvals, then auto-pay</h3>
+          <p>Vendor bills notify the board, collect the approval quorum you set, and pay the moment the votes are in — every step recorded.</p>
+        </div>
+        <div class="card">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg></div>
+          <h3>Bank sync &amp; reconciliation</h3>
+          <p>Connect the association’s account and the books reconcile against the bank automatically — flagging anything that doesn’t match.</p>
+        </div>
+        <div class="card">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"/></svg></div>
+          <h3>Compliance &amp; filings handled</h3>
+          <p>Deadlines, required notices, 1099s, and state filings tracked and prepared — so the board never misses the thing that creates liability.</p>
+        </div>
+        <div class="card">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+          <h3>Homeowners get instant answers</h3>
+          <p>Residents ask a question and get an answer straight from your CC&amp;Rs, with the exact section cited. Only the real exceptions reach the board.</p>
+        </div>
+        <div class="card">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h12"/></svg></div>
+          <h3>Violations &amp; ARC requests, tracked fairly</h3>
+          <p>Architectural requests and violations follow the same rules every time, with a record you can stand behind at a hearing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COST SAVINGS CHART -->
+  <section id="savings" style="background:var(--surface-2);border-block:1px solid var(--border)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">The math</div>
+        <h2>A management company bills every month. HOABoard doesn’t.</h2>
+        <p class="lead">Here’s what a 132-home community pays over five years — the gap goes straight back into your reserves.</p>
+      </div>
+      <div class="cost-grid">
+        <div>
+          <div class="save-pop"><span class="big num">$90,000+</span> kept in the community over five years, versus a typical management contract.</div>
+          <p class="muted" style="margin-top:16px;font-size:15px">Management fees compound every single month, whether or not anything happened. HOABoard is a flat software fee — the line stays low and your reserves keep the difference.</p>
+          <div class="cta-row" style="margin-top:24px">
+            <a class="btn btn-primary" href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">See it with your numbers <span class="arrow">→</span></a>
+          </div>
+        </div>
+        <div class="cost-card">
+          <div class="legend">
+            <span><i class="dot" style="background:var(--negative)"></i> Management company</span>
+            <span><i class="dot" style="background:var(--brand)"></i> HOABoard</span>
+          </div>
+          <svg viewBox="0 0 560 260" width="100%" role="img" aria-label="Cumulative cost over five years: management company rises steeply, HOABoard stays low and flat">
+            <defs><linearGradient id="mgmtfill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--negative)" stop-opacity=".14"/><stop offset="100%" stop-color="var(--negative)" stop-opacity="0"/>
+            </linearGradient></defs>
+            <!-- gridlines -->
+            <g stroke="var(--border)" stroke-width="1"><line x1="40" y1="30" x2="560" y2="30"/><line x1="40" y1="90" x2="560" y2="90"/><line x1="40" y1="150" x2="560" y2="150"/><line x1="40" y1="210" x2="560" y2="210"/></g>
+            <!-- y labels -->
+            <g fill="var(--text-tertiary)" font-size="11" font-family="Inter,sans-serif" text-anchor="end">
+              <text x="34" y="34">$90k</text><text x="34" y="94">$60k</text><text x="34" y="154">$30k</text><text x="34" y="214">$0</text>
+            </g>
+            <!-- x labels -->
+            <g fill="var(--text-tertiary)" font-size="11" font-family="Inter,sans-serif" text-anchor="middle">
+              <text x="40" y="232">Yr 1</text><text x="170" y="232">Yr 2</text><text x="300" y="232">Yr 3</text><text x="430" y="232">Yr 4</text><text x="552" y="232">Yr 5</text>
+            </g>
+            <!-- management: steep cumulative climb to ~$90k -->
+            <path d="M40,174 L170,138 L300,102 L430,66 L552,30 L552,210 L40,210 Z" fill="url(#mgmtfill)"/>
+            <path d="M40,174 L170,138 L300,102 L430,66 L552,30" fill="none" stroke="var(--negative)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+            <circle cx="552" cy="30" r="4" fill="var(--negative)"/>
+            <!-- HOABoard: flat low line ~$3k->$9k -->
+            <path d="M40,206 L170,203 L300,200 L430,197 L552,194" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+            <circle cx="552" cy="194" r="4" fill="var(--brand)"/>
+          </svg>
+          <p class="cost-note">Illustrative: 132 homes at a typical $12/door/month management fee vs. a flat HOABoard software fee. Management pricing varies by region and community size.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Getting started</div>
+        <h2>Upload your documents. The rest sets itself up.</h2>
+        <p class="lead">You don’t configure software. You hand over what the community already has, and HOABoard builds your community for you.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>Upload your governing docs</h3>
+          <p>Drag in your CC&amp;Rs, bylaws, amendments, and management certificate. Scanned PDFs are read with OCR.</p>
+        </div>
+        <div class="step">
+          <h3>HOABoard reads and sets up</h3>
+          <p>Your rules are extracted, tagged by topic, and made searchable — so they go live the moment they’re read.</p>
+        </div>
+        <div class="step">
+          <h3>Go live &amp; invite your board</h3>
+          <p>Import your owner roster, connect payments if you want them, and open the dashboard. Most boards finish in under an hour.</p>
+        </div>
+      </div>
+      <div class="cta-row" style="margin-top:40px">
+        <a class="btn btn-primary" href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">Start setting up your community <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section id="compare" style="background:var(--surface-2);border-block:1px solid var(--border)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Why boards switch</div>
+        <h2>Same job. A fraction of the cost. All the control.</h2>
+      </div>
+      <div class="cmp-wrap">
+        <table class="cmp">
+          <thead>
+            <tr><th></th><th class="us">HOABoard</th><th>Management company</th><th>Spreadsheets</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Typical cost</th><td class="us col-us">Flat software fee</td><td>$10–$50 / door / month</td><td>Your weekends</td></tr>
+            <tr><th scope="row">Who holds the money</th><td class="us col-us"><span class="mk">✓</span>Your bank, always</td><td>Their trust account</td><td>Your bank</td></tr>
+            <tr><th scope="row">Homeowner questions</th><td class="us col-us"><span class="mk">✓</span>Answered instantly, cited</td><td>Email &amp; wait</td><td>Falls on the board</td></tr>
+            <tr><th scope="row">Books reconciled to the bank</th><td class="us col-us"><span class="mk">✓</span>Automatic, ~daily</td><td>Monthly, if you ask</td><td>Manual</td></tr>
+            <tr><th scope="row">When the board turns over</th><td class="us col-us"><span class="mk">✓</span>Full audit trail hands over</td><td>Locked in their system</td><td>Lost on a laptop</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cost-note">Management-company pricing varies by region and community size; the range shown is typical for small associations.</p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section>
+    <div class="wrap">
+      <div class="final">
+        <h2>Give your board its evenings — and its budget — back.</h2>
+        <p>Upload your documents and watch your own community set up. It takes minutes to start, and your funds never leave your bank.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">Set up your community <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#features">See everything it does</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="#top"><span class="mk">H</span>HOABoard</a>
+    <span>Self-management for HOA boards.</span>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#savings">The math</a>
+      <a href="https://hoaboard.onrender.com/onboard" target="_blank" rel="noopener">Get started</a>
+    </nav>
+  </div>
+</footer>
 
 <script>
-function setView(v){
-  document.getElementById('view-boards').classList.toggle('on', v==='boards');
-  document.getElementById('view-mgmt').classList.toggle('on', v==='mgmt');
-  document.getElementById('swB').classList.toggle('on', v==='boards');
-  document.getElementById('swM').classList.toggle('on', v==='mgmt');
-  document.getElementById('roleSel').value = v==='mgmt' ? 'Management Company — Executive' : 'Board President';
-}
-function calc(){
-  var homes=Math.max(1,Number(document.getElementById('calcHomes').value)||0);
-  var fee=Math.max(0,Number(document.getElementById('calcFee').value)||0);
-  var ours = homes<=200 ? Math.max(199, homes*5) : homes<=500 ? 999+(homes-200)*3 : 1899+(homes-500)*2;
-  var mo=fee-ours, yr=mo*12;
-  document.getElementById('calcOurs').textContent='$'+ours.toLocaleString()+'/mo';
-  var mEl=document.getElementById('calcMo'), yEl=document.getElementById('calcYr');
-  if(mo>0){ mEl.textContent='$'+mo.toLocaleString(); yEl.textContent='$'+yr.toLocaleString();
-    var eff=(ours/homes).toFixed(2);
-    document.getElementById('calcNote').textContent=(homes>200?'Just $'+eff+' per home effective — ':'')+'money that stays in your reserves, with the work done for you.';
-  } else { mEl.textContent='—'; yEl.textContent='—';
-    document.getElementById('calcNote').textContent='Self-managed today? HOABoard costs $'+ours.toLocaleString()+'/mo — and gives your volunteers their evenings back.';
-  }
-}
-function openDemo(){document.getElementById('demoModal').classList.add('on');document.body.style.overflow='hidden'}
-function closeDemo(){document.getElementById('demoModal').classList.remove('on');document.body.style.overflow=''}
-async function sendDemo(e){
-  e.preventDefault();
-  var btn=document.getElementById('demoBtn');btn.textContent='Sending…';btn.disabled=true;
-  var data=Object.fromEntries(new FormData(document.getElementById('demoF')));
-  try{
-    var r=await fetch('https://formsubmit.co/ajax/satish.kodukula@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
-    if(!r.ok)throw 0;
-    document.getElementById('demoForm').style.display='none';
-    document.getElementById('demoOk').style.display='block';
-  }catch(_){
-    location.href='mailto:satish.kodukula@gmail.com?subject=HOABoard demo request&body='+encodeURIComponent('Name: '+data.name+'\nEmail: '+data.email+'\nOrg: '+data.community+' ('+data.homes+')\nRole: '+data.role+'\n'+(data.message||''));
-  }
-  return false;
-}
-if(document.getElementById('calcHomes')) calc();
+  // sticky nav border on scroll
+  var nav=document.getElementById('nav');
+  var onScroll=function(){ nav.classList.toggle('scrolled', window.scrollY>8); };
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
 </script>
 </body>
 </html>
